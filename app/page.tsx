@@ -27,13 +27,50 @@ export default function Home() {
     }
   }, []);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function RecursiveWebApp({ data }: { data: any }) {
+    // Сортируем ключи объекта по алфавиту
+    const sortedEntries = Object.entries(data).sort((a, b) => 
+      a[0].localeCompare(b[0], 'ru')
+    );
+  
+    return (
+      <div>
+        {sortedEntries.map(([key, value]) => {
+          if (typeof value === 'object' && value !== null) {
+            return (
+              <li key={key} className="ml-4">
+                <h3 className="font-bold">{key}:</h3>
+                <RecursiveWebApp data={value} />
+              </li>
+            );
+          }
+          return (
+            <div key={key} className="ml-4">
+              <span className="font-bold">{key}:</span> {String(value)}
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+  
+
   const webAppVersion = typeof window !== 'undefined' ? WebApp.version : null;
   const webApp = typeof window !== 'undefined' ? WebApp : null;
+  const tgWebApp = typeof window !== 'undefined' ? All : null;
+
 
   return (
     <main>
+      <h1 className="text-2xl font-bold mb-4">tgWebAppVersion</h1>
+      {tgWebApp && <div>{tgWebApp.$version()}</div>}
+      <h1 className="text-2xl font-bold mb-4">webAppVersion</h1>
       {webAppVersion && <div>{webAppVersion}</div>}
-      {webApp && <div>{JSON.stringify(webApp)}</div>}
+      <h1 className="text-2xl font-bold mb-4">webApp</h1>
+      {webApp && <RecursiveWebApp data={webApp} />}
+      <h1 className="text-2xl font-bold mb-4">tgWebApp</h1>
+      {webApp && <RecursiveWebApp data={tgWebApp} />}
       {
         userData ? (
           <div>
