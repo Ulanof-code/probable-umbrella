@@ -21,6 +21,7 @@ export default function Home() {
   useEffect(() => {
     // Расширяем приложение на весь экран
     WebApp.expand();
+    console.log(WebApp);
     // Отключаем вертикальные свайпы
     WebApp.disableVerticalSwipes();
     // Опционально: скрыть основную кнопку, если она не нужна
@@ -35,6 +36,7 @@ export default function Home() {
 
   return (
     <main>
+      <div>{JSON.stringify(WebApp)}</div>
       {
         userData ? (
           <div>
