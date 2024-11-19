@@ -1,6 +1,6 @@
 "use client";
 
-import { Image } from "@nextui-org/image";
+import { Image } from "@nextui-org/react";
 
 export function DrinkHero() {
   return (

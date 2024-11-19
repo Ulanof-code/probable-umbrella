@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@nextui-org/button";
+import { Button } from "@nextui-org/react";
 
 interface CategoryProps {
   categories: Array<{ id: number; name: string }>;

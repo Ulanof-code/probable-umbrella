@@ -1,7 +1,7 @@
 "use client";
 
 import WebApp from "@twa-dev/sdk";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@nextui-org/button";
 import DrinkOrder from "../components/drinks/DrinkOrder";
 
@@ -19,6 +19,15 @@ export default function Home() {
   const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
+    // Расширяем приложение на весь экран
+    WebApp.expand();
+    // Отключаем вертикальные свайпы
+    WebApp.disableVerticalSwipes();
+    // Опционально: скрыть основную кнопку, если она не нужна
+    WebApp.MainButton.hide();
+    // Опционально: установить заголовок
+    WebApp.setHeaderColor("#000000");
+    WebApp.setBackgroundColor("#FFFFFF");
     if (WebApp.initDataUnsafe.user) {
       setUserData(WebApp.initDataUnsafe.user as UserData);
     };
