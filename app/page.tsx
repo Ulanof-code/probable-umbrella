@@ -1,7 +1,9 @@
 "use client";
 
 import WebApp from "@twa-dev/sdk";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Button } from "@nextui-org/button";
+import DrinkOrder from "../components/drinks/DrinkOrder";
 
 interface UserData {
   id: number;
@@ -41,6 +43,8 @@ export default function Home() {
           <div>Loading...</div>
         )
       }
+      <Button>Click me</Button>
+      <DrinkOrder />
     </main>
   );
 }
