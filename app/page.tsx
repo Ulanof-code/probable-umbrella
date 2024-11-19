@@ -28,10 +28,12 @@ export default function Home() {
   }, []);
 
   const webAppVersion = typeof window !== 'undefined' ? WebApp.version : null;
+  const webApp = typeof window !== 'undefined' ? WebApp : null;
 
   return (
     <main>
       {webAppVersion && <div>{webAppVersion}</div>}
+      {webApp && <div>{JSON.stringify(webApp)}</div>}
       {
         userData ? (
           <div>
