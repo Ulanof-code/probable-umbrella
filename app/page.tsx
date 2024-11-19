@@ -1,6 +1,7 @@
 "use client";
 
 import WebApp from "@twa-dev/sdk";
+import * as All from "@telegram-apps/sdk";
 import { useEffect, useState } from "react";
 import { Button } from "@nextui-org/button";
 import DrinkOrder from "../components/drinks/DrinkOrder";
@@ -19,24 +20,18 @@ export default function Home() {
   const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
-    // Расширяем приложение на весь экран
-    WebApp.expand();
-    console.log(WebApp);
-    // Отключаем вертикальные свайпы
-    WebApp.disableVerticalSwipes();
-    // Опционально: скрыть основную кнопку, если она не нужна
-    WebApp.MainButton.hide();
-    // Опционально: установить заголовок
-    WebApp.setHeaderColor("#000000");
-    WebApp.setBackgroundColor("#FFFFFF");
-    if (WebApp.initDataUnsafe.user) {
-      setUserData(WebApp.initDataUnsafe.user as UserData);
-    };
+    if (typeof window !== 'undefined') {
+      if (WebApp.initDataUnsafe.user) {
+        setUserData(WebApp.initDataUnsafe.user as UserData);
+      }
+    }
   }, []);
+
+  const webAppVersion = typeof window !== 'undefined' ? WebApp.version : null;
 
   return (
     <main>
-      <div>{JSON.stringify(WebApp)}</div>
+      {webAppVersion && <div>{webAppVersion}</div>}
       {
         userData ? (
           <div>
