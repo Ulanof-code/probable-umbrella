@@ -5,6 +5,7 @@ import * as All from "@telegram-apps/sdk";
 import { useEffect, useState } from "react";
 import { Button } from "@nextui-org/button";
 import DrinkOrder from "../components/drinks/DrinkOrder";
+import { useTelegram } from "./hooks/useTelegram";
 
 interface UserData {
   id: number;
@@ -17,13 +18,14 @@ interface UserData {
 
 export default function Home() {
 
-  const [userData, setUserData] = useState<UserData | null>(null);
+  const { isFullscreen, isActive, isLoaded, showPopup, user } = useTelegram();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      if (WebApp.initDataUnsafe.user) {
-        setUserData(WebApp.initDataUnsafe.user as UserData);
-      }
+      showPopup({
+        message: "Hello, world!",
+      });
+      WebApp.ready();
     }
   }, []);
 
@@ -46,9 +48,9 @@ export default function Home() {
             );
           }
           return (
-            <div key={key} className="ml-4">
+            <li key={key} className="ml-4">
               <span className="font-bold">{key}:</span> {String(value)}
-            </div>
+            </li>
           );
         })}
       </div>
@@ -63,6 +65,8 @@ export default function Home() {
 
   return (
     <main>
+      <h1 className="text-2xl font-bold mb-4">isActive</h1>
+      {typeof window !== 'undefined' && <div>{isLoaded ? "Yes" : "No"}</div>}
       <h1 className="text-2xl font-bold mb-4">tgWebAppVersion</h1>
       {tgWebApp && <div>{tgWebApp.$version()}</div>}
       <h1 className="text-2xl font-bold mb-4">webAppVersion</h1>
@@ -72,16 +76,16 @@ export default function Home() {
       <h1 className="text-2xl font-bold mb-4">tgWebApp</h1>
       {webApp && <RecursiveWebApp data={tgWebApp} />}
       {
-        userData ? (
+        user ? (
           <div>
-            <h1 className="text-2xl font-bold mb-4">Hello, {userData.first_name}!</h1>
+            <h1 className="text-2xl font-bold mb-4">Hello, {user.first_name}!</h1>
             <ul>
-              <li>ID: {userData.id}</li>
-              <li>First Name: {userData.first_name}</li>
-              <li>Last Name: {userData.last_name}</li>
-              <li>Username: {userData.username}</li>
-              <li>Language Code: {userData.language_code}</li>
-              <li>Is Premium: {userData.is_premium ? "Yes" : "No"}</li>
+              <li>ID: {user.id}</li>
+              <li>First Name: {user.first_name}</li>
+              <li>Last Name: {user.last_name}</li>
+              <li>Username: {user.username}</li>
+              <li>Language Code: {user.language_code}</li>
+              <li>Is Premium: {user.is_premium ? "Yes" : "No"}</li>
             </ul>
           </div>
         ) : (
