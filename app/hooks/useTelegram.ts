@@ -20,7 +20,7 @@ export function useTelegram() {
 
   useEffect(() => {
     setTg(window.Telegram?.WebApp as unknown as TelegramWebApps ?? null);
-    setUser(tg?.WebApp?.initDataUnsafe?.user ?? null);
+    setUser(window.Telegram?.WebApp?.initDataUnsafe?.user ?? null);
   }, []);
 
   // Основные методы
