@@ -20,8 +20,14 @@ export function useTelegram() {
 
   useEffect(() => {
     setTg(window.Telegram?.WebApp as unknown as TelegramWebApps ?? null);
-    setUser(window.Telegram?.WebApp?.initDataUnsafe?.user ?? null);
+    // setUser(window.Telegram?.WebApp?.initDataUnsafe?.user ?? null);
   }, []);
+
+  useEffect(() => {
+    if (tg) {
+      setUser(tg.WebApp.initDataUnsafe?.user ?? null);
+    }
+  }, [tg]);
 
   // Основные методы
   const close = () => tg?.WebApp?.close();
