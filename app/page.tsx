@@ -22,7 +22,7 @@ export default function Home() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      showPopup({
+      window.Telegram?.WebApp?.showPopup({
         message: "Hello, world!",
       });
       WebApp.ready();
