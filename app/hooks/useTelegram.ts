@@ -23,56 +23,55 @@ export function useTelegram() {
   }, []);
 
   // Основные методы
-  const close = () => tg?.WebApp.close();
-  const expand = () => tg?.WebApp.expand();
-  const isExpanded = tg?.WebApp.isExpanded;
+  const close = () => tg?.WebApp?.close();
+  const expand = () => tg?.WebApp?.expand();
+  const isExpanded = tg?.WebApp?.isExpanded;
 
   // Полноэкранный режим (Bot API 8.0)
-  const requestFullscreen = (options?: { scrollable?: boolean }) => tg?.WebApp.requestFullscreen(options);
-  const exitFullscreen = () => tg?.WebApp.exitFullscreen();
-  const isFullscreen = tg?.WebApp.isFullscreen;
+  const requestFullscreen = (options?: { scrollable?: boolean }) => tg?.WebApp?.requestFullscreen(options);
+  const exitFullscreen = () => tg?.WebApp?.exitFullscreen();
+  const isFullscreen = tg?.WebApp?.isFullscreen;
 
   // Безопасные области и размеры
-  const safeAreaInset = tg?.WebApp.safeAreaInset;
-  const viewportHeight = tg?.WebApp.viewportHeight;
-  const viewportStableHeight = tg?.WebApp.viewportStableHeight;
+  const safeAreaInset = tg?.WebApp?.safeAreaInset;
+  const viewportHeight = tg?.WebApp?.viewportHeight;
+  const viewportStableHeight = tg?.WebApp?.viewportStableHeight;
 
   // Управление кнопками
   const mainButton = {
-    show: () => tg?.WebApp.MainButton.show(),
-    hide: () => tg?.WebApp.MainButton.hide(),
+    show: () => tg?.WebApp?.MainButton?.show(),
+    hide: () => tg?.WebApp?.MainButton?.hide(),
     setText: (text: string) => {
-      if (tg?.WebApp.MainButton) tg.WebApp.MainButton.text = text;
+      if (tg?.WebApp?.MainButton) tg.WebApp.MainButton.text = text;
     },
-    onClick: (fn: () => void) => tg?.WebApp.MainButton.onClick(fn),
-    offClick: (fn: () => void) => tg?.WebApp.MainButton.offClick(fn),
-    enable: () => tg?.WebApp.MainButton.enable(),
-    disable: () => tg?.WebApp.MainButton.disable(),
+    onClick: (fn: () => void) => tg?.WebApp?.MainButton?.onClick(fn),
+    offClick: (fn: () => void) => tg?.WebApp?.MainButton?.offClick(fn),
+    enable: () => tg?.WebApp?.MainButton?.enable(),
+    disable: () => tg?.WebApp?.MainButton?.disable(),
   };
 
   const secondaryButton = {
-    show: () => tg?.WebApp.SecondaryButton?.show(),
-    hide: () => tg?.WebApp.SecondaryButton?.hide(),
+    show: () => tg?.WebApp?.SecondaryButton?.show(),
+    hide: () => tg?.WebApp?.SecondaryButton?.hide(),
     setText: (text: string) => {
-      if (tg?.WebApp.SecondaryButton) tg.WebApp.SecondaryButton.text = text;
+      if (tg?.WebApp?.SecondaryButton) tg.WebApp.SecondaryButton.text = text;
     },
-    onClick: (fn: () => void) => tg?.WebApp.SecondaryButton?.onClick(fn),
-    offClick: (fn: () => void) => tg?.WebApp.SecondaryButton?.offClick(fn),
+    onClick: (fn: () => void) => tg?.WebApp?.SecondaryButton?.onClick(fn),
+    offClick: (fn: () => void) => tg?.WebApp?.SecondaryButton?.offClick(fn),
   };
 
   const backButton = {
-    show: () => tg?.WebApp.BackButton.show(),
-    hide: () => tg?.WebApp.BackButton.hide(),
-    onClick: (fn: () => void) => tg?.WebApp.BackButton.onClick(fn),
-    offClick: (fn: () => void) => tg?.WebApp.BackButton.offClick(fn),
+    show: () => tg?.WebApp?.BackButton?.show(),
+    hide: () => tg?.WebApp?.BackButton?.hide(),
+    onClick: (fn: () => void) => tg?.WebApp?.BackButton?.onClick(fn),
+    offClick: (fn: () => void) => tg?.WebApp?.BackButton?.offClick(fn),
   };
 
-  // Новые методы из Bot API 8.0
   const settingsButton = {
-    show: () => tg?.WebApp.SettingsButton?.show(),
-    hide: () => tg?.WebApp.SettingsButton?.hide(),
-    onClick: (fn: () => void) => tg?.WebApp.SettingsButton?.onClick(fn),
-    offClick: (fn: () => void) => tg?.WebApp.SettingsButton?.offClick(fn),
+    show: () => tg?.WebApp?.SettingsButton?.show(),
+    hide: () => tg?.WebApp?.SettingsButton?.hide(),
+    onClick: (fn: () => void) => tg?.WebApp?.SettingsButton?.onClick(fn),
+    offClick: (fn: () => void) => tg?.WebApp?.SettingsButton?.offClick(fn),
   };
 
   // Методы для работы с UI
@@ -84,42 +83,42 @@ export function useTelegram() {
       type?: 'default' | 'ok' | 'close' | 'cancel' | 'destructive';
       text: string;
     }>;
-  }) => tg?.WebApp.showPopup(params);
+  }) => tg?.WebApp?.showPopup(params);
 
-  const showAlert = (message: string) => tg?.WebApp.showAlert(message);
-  const showConfirm = (message: string) => new Promise<boolean>((resolve) => tg?.WebApp.showConfirm(message, resolve));
+  const showAlert = (message: string) => tg?.WebApp?.showAlert(message);
+  const showConfirm = (message: string) => new Promise<boolean>((resolve) => tg?.WebApp?.showConfirm(message, resolve));
 
-  // Новые методы для работы с темой
-  const setHeaderColor = (color: string) => tg?.WebApp.setHeaderColor(color);
-  const setBackgroundColor = (color: string) => tg?.WebApp.setBackgroundColor(color);
-  const setBottomBarColor = (color: string) => tg?.WebApp.setBottomBarColor(color);
+  // Методы для работы с темой
+  const setHeaderColor = (color: string) => tg?.WebApp?.setHeaderColor(color);
+  const setBackgroundColor = (color: string) => tg?.WebApp?.setBackgroundColor(color);
+  const setBottomBarColor = (color: string) => tg?.WebApp?.setBottomBarColor(color);
 
-  // Методы для работы с ссылками и историями
-  const openLink = (url: string, options?: { try_instant_view?: boolean }) => tg?.WebApp.openLink(url, options);
-  const openTelegramLink = (url: string) => tg?.WebApp.openTelegramLink(url);
-  const shareToStory = (params: { media: string; text?: string; sticker?: string; }) => tg?.WebApp.shareToStory(params);
+  // Методы для работы с ссылками
+  const openLink = (url: string, options?: { try_instant_view?: boolean }) => tg?.WebApp?.openLink(url, options);
+  const openTelegramLink = (url: string) => tg?.WebApp?.openTelegramLink(url);
+  const shareToStory = (params: { media: string; text?: string; sticker?: string; }) => tg?.WebApp?.shareToStory(params);
 
   // CloudStorage API
   const cloudStorage = {
     setItem: (key: string, value: string) => 
       new Promise<void>((resolve, reject) => 
-        tg?.WebApp.CloudStorage?.setItem(key, value, (error: Error | null) => error ? reject(error) : resolve())
+        tg?.WebApp?.CloudStorage?.setItem(key, value, (error: Error | null) => error ? reject(error) : resolve())
       ),
     getItem: (key: string) => 
       new Promise<string>((resolve, reject) => 
-        tg?.WebApp.CloudStorage?.getItem(key, (error: Error | null, value?: string) => error ? reject(error) : resolve(value ?? ''))
+        tg?.WebApp?.CloudStorage?.getItem(key, (error: Error | null, value?: string) => error ? reject(error) : resolve(value ?? ''))
       ),
     removeItem: (key: string) => 
       new Promise<void>((resolve, reject) => 
-        tg?.WebApp.CloudStorage?.removeItem(key, (error: Error | null) => error ? reject(error) : resolve())
+        tg?.WebApp?.CloudStorage?.removeItem(key, (error: Error | null) => error ? reject(error) : resolve())
       ),
     getKeys: () => 
       new Promise<string[]>((resolve, reject) => 
-        tg?.WebApp.CloudStorage?.getKeys((error: Error | null, keys?: string[]) => error ? reject(error) : resolve(keys ?? []))
+        tg?.WebApp?.CloudStorage?.getKeys((error: Error | null, keys?: string[]) => error ? reject(error) : resolve(keys ?? []))
       ),
   };
 
-  const isActive = tg?.WebApp.isActive;
+  const isActive = tg?.WebApp?.isActive;
 
   return {
     tg,
@@ -149,9 +148,9 @@ export function useTelegram() {
     shareToStory,
     cloudStorage,
     isLoaded: !!tg,
-    platform: tg?.WebApp.platform,
-    colorScheme: tg?.WebApp.colorScheme,
-    themeParams: tg?.WebApp.themeParams,
+    platform: tg?.WebApp?.platform,
+    colorScheme: tg?.WebApp?.colorScheme,
+    themeParams: tg?.WebApp?.themeParams,
     isActive,
   };
 }
