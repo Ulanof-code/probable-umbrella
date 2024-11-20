@@ -25,7 +25,7 @@ export function useTelegram() {
 
   useEffect(() => {
     if (tg) {
-      setUser(tg.WebApp.initDataUnsafe?.user ?? null);
+      setUser(tg?.WebApp?.initDataUnsafe?.user ?? null);
     }
   }, [tg]);
 
