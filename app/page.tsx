@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@nextui-org/button";
 import DrinkOrder from "../components/drinks/DrinkOrder";
 import { useTelegram } from "./hooks/useTelegram";
+import SplashScreen from "../components/spalashScreen/SplashScreen";
 
 interface UserData {
   id: number;
@@ -16,18 +17,44 @@ interface UserData {
   is_premium?: boolean;
 }
 
+/**
+ * хук useTelegram не работает, предстоит выяснить почему
+ * используем window.Telegram?.WebApp
+ */
+
 export default function Home() {
 
   const { isFullscreen, isActive, isLoaded, showPopup, user } = useTelegram();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAppReady, setIsAppReady] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      window.Telegram?.WebApp?.showPopup({
-        message: "Hello, world!",
-      });
+        window.Telegram?.WebApp?.showPopup({
+          message: "Hello, world!",
+        });
       WebApp.ready();
     }
   }, []);
+
+  useEffect(() => {
+    // Здесь инициализируем все необходимые ресурсы
+    const initializeApp = async () => {
+      if (typeof window !== 'undefined') {
+        // Инициализация WebApp
+        WebApp.ready();
+        setIsAppReady(true);
+      }
+    };
+
+    initializeApp();
+  }, []);
+
+  const handleLoadingComplete = () => {
+    if (isAppReady) {
+      setIsLoading(false);
+    }
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function RecursiveWebApp({ data }: { data: any }) {
@@ -35,6 +62,10 @@ export default function Home() {
     const sortedEntries = Object.entries(data).sort((a, b) => 
       a[0].localeCompare(b[0], 'ru')
     );
+
+    if (isLoading) {
+      return <SplashScreen onLoadingComplete={handleLoadingComplete} />;
+    }
   
     return (
       <div>
