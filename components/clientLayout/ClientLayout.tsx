@@ -33,7 +33,7 @@ export default function ClientLayout({
   };
 
   if (isLoading) {
-    return <SplashScreen onLoadingComplete={handleLoadingComplete} />;
+    return <SplashScreen minimumLoadTimeMs={4000} onLoadingComplete={handleLoadingComplete} />;
   }
 
   return <>{children}</>;
