@@ -8,7 +8,7 @@ interface SplashScreenProps {
   onLoadingComplete: () => void;
 }
 
-const transition = { duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" };
+const transition = { duration: 4, repeat: 5, repeatType: "reverse" as const, ease: "easeInOut" };
 
 export default function SplashScreen({ 
   minimumLoadTimeMs = 2000,
